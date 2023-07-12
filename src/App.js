@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import NavBar from './components/NavBar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Routes
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
 
@@ -22,7 +22,8 @@ function App() {
     about: "About",
   }
 
-  const toggleMode = () => {
+  const toggleMode = (cls) => {
+    console.log(cls);
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#212529";
@@ -47,15 +48,14 @@ function App() {
 
   return (
     <>
-      {/* <Router> */}
+      <Router>
         <NavBar data={details} mode={mode} toggleMode={toggleMode} />
         <Alert alert={alert} />
-        <TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert} />
-        {/* <Routes> */}
-          {/* <Route exact path="/" element={<TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert} />} /> */}
-          {/* <Route exact path="/about" element={<About heading="About Us" mode={mode} toggleMode={toggleMode} />} /> */}
-        {/* </Routes> */}
-      {/* </Router> */}
+        <Routes>
+          <Route exact path="/" element={<TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert} />} />
+          <Route exact path="/about" element={<About heading="About Us" mode={mode} toggleMode={toggleMode} />} />
+        </Routes>
+      </Router>
     </>
   );
 }
